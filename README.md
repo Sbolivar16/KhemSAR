@@ -5,10 +5,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.12](https://img.shields.io/badge/Python-3.10%E2%80%933.12-3776AB.svg)](https://www.python.org/)
 [![OECD QSAR Principles](https://img.shields.io/badge/OECD-5%20Principles%20Compliant-009E73.svg)](SCIENTIFIC_METHODOLOGY.md)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24308701.svg)](https://doi.org/10.5281/zenodo.24308701)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24308700.svg)](https://doi.org/10.5281/zenodo.24308700)
 
-**Author:** Santiago Jr. Bolivar Avila  
-**Affiliation:** Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia  
+**Authors:** Santiago Bolívar Ávila ([ORCID 0000-0002-3772-7604](https://orcid.org/0000-0002-3772-7604)), Richard Navarro, Pierine España Puccini  
+**Affiliations:** Master's Programme in Biotechnology, Universidad Libre, Puerto Colombia, Colombia; Departamento de Química, Facultad de Ciencias Básicas, Universidad del Atlántico, Puerto Colombia, Colombia; IMB-Research Group in Medicine and Biotechnology, Universidad Libre, Puerto Colombia, Colombia  
 **Repository:** [https://github.com/Sbolivar16/KhemSAR](https://github.com/Sbolivar16/KhemSAR)
 
 ---
@@ -76,18 +76,18 @@ Then open `http://127.0.0.1:8765` in your browser. See [INSTALL.md](INSTALL.md) 
 
 ## How to Cite
 
-Please cite **KhemSAR** using `CITATION.cff` or the Zenodo DOI generated after publishing a release (see [ZENODO_GITHUB_GUIDE.md](ZENODO_GITHUB_GUIDE.md)):
+Please cite the version of **KhemSAR** you used. For v1.0.1 (which contains the corrected cRp2 calculation, see [CHANGELOG.md](CHANGELOG.md)) use the version DOI [10.5281/zenodo.24318136](https://doi.org/10.5281/zenodo.24318136). The concept DOI [10.5281/zenodo.24308700](https://doi.org/10.5281/zenodo.24308700) always resolves to the latest release. Metadata is also available in `CITATION.cff`.
 
 ```bibtex
 @software{bolivar_avila_khemsar_2026,
-  author       = {Bolivar Avila, Santiago Jr.},
-  title        = {{KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform}},
+  author       = {Bol{\'i}var {\'A}vila, Santiago and Navarro, Richard and Espa{\~n}a Puccini, Pierine},
+  title        = {{KhemSAR: An Open-Source Platform for OECD-Aligned QSAR Validation, Mechanistic SAR Interpretation and Bioisosteric De Novo Design}},
   year         = {2026},
   publisher    = {Zenodo},
-  version      = {v1.0.0},
-  doi          = {10.5281/zenodo.24308701},
-  url          = {https://doi.org/10.5281/zenodo.24308701},
-  note         = {Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia. Source code: https://github.com/Sbolivar16/KhemSAR}
+  version      = {v1.0.1},
+  doi          = {10.5281/zenodo.24318136},
+  url          = {https://doi.org/10.5281/zenodo.24318136},
+  note         = {Source code: https://github.com/Sbolivar16/KhemSAR}
 }
 ```
 
