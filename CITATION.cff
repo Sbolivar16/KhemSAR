@@ -11,7 +11,7 @@ message: "If you use KhemSAR in your research, please cite both the software (be
 title: "KhemSAR: An Open-Source Platform for OECD-Aligned QSAR Validation, Mechanistic SAR Interpretation and Bioisosteric De Novo Design"
 type: software
 version: "1.0.1"
-doi: "10.5281/zenodo.24308701"
+doi: "10.5281/zenodo.24318136"
 date-released: "2026-11-17"
 license: MIT
 repository-code: "https://github.com/Sbolivar16/KhemSAR"
