@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10–3.12](https://img.shields.io/badge/Python-3.10%E2%80%933.12-3776AB.svg)](https://www.python.org/)
 [![OECD QSAR Principles](https://img.shields.io/badge/OECD-5%20Principles%20Compliant-009E73.svg)](SCIENTIFIC_METHODOLOGY.md)
-[![DOI](https://img.shields.io/badge/Zenodo-DOI%20Ready%20(Publish%20Release)-0072B2.svg)](ZENODO_GITHUB_GUIDE.md)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24308701.svg)](https://doi.org/10.5281/zenodo.24308701)
 
 **Author:** Santiago Jr. Bolivar Avila  
 **Affiliation:** Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia  
