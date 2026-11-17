@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "khemsar"
-version = "1.0.0"
+version = "1.0.1"
 description = "Rigorous, paper-ready QSAR/SAR modeling, scientific AI tutor, and bioisosteric de novo design platform."
 readme = "README.md"
 license = { file = "LICENSE" }

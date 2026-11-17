@@ -1,17 +1,34 @@
+# NOTE FOR THE MAINTAINER
+# 1. After tagging release v1.0.1 (which contains the corrected cRp2 calculation),
+#    update "version", "date-released" and "doi" below with the version-specific
+#    Zenodo DOI of that release, not the concept DOI.
+# 2. Fill in the two missing ORCID identifiers.
+# 3. Once the Application Note is published, uncomment the "preferred-citation"
+#    block at the end and complete it. GitHub's "Cite this repository" button
+#    will then offer the article instead of the software record.
 cff-version: 1.2.0
-message: "If you use KhemSAR in your research, please cite it using the metadata below."
-title: "KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform"
+message: "If you use KhemSAR in your research, please cite both the software (below) and the accompanying article."
+title: "KhemSAR: An Open-Source Platform for OECD-Aligned QSAR Validation, Mechanistic SAR Interpretation and Bioisosteric De Novo Design"
 type: software
-version: "1.0.0"
+version: "1.0.1"
 doi: "10.5281/zenodo.24308701"
-date-released: "2026-11-16"
+date-released: "2026-11-17"
 license: MIT
 repository-code: "https://github.com/Sbolivar16/KhemSAR"
 url: "https://github.com/Sbolivar16/KhemSAR"
 authors:
-  - family-names: "Bolivar Avila"
-    given-names: "Santiago Jr."
-    affiliation: "Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia"
+  - family-names: "Bolívar Ávila"
+    given-names: "Santiago"
+    orcid: "https://orcid.org/0000-0002-3772-7604"
+    affiliation: "Master's Programme in Biotechnology, Universidad Libre, Puerto Colombia 080007, Colombia"
+  - family-names: "Navarro"
+    given-names: "Richard"
+    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+    affiliation: "Universidad del Atlántico, Facultad de Ciencias Básicas, Departamento de Química, Puerto Colombia, Atlántico, Colombia"
+  - family-names: "España Puccini"
+    given-names: "Pierine"
+    # orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+    affiliation: "IMB-Research Group in Medicine and Biotechnology, Universidad Libre, Puerto Colombia 080007, Colombia"
 keywords:
   - QSAR
   - SAR
@@ -22,12 +39,30 @@ keywords:
   - applicability domain
   - OECD principles
   - matched molecular pairs
-  - artificial intelligence
+  - model validation
 abstract: >-
-  KhemSAR is a cross-platform (macOS, Linux, Windows), multilingual (Spanish, English,
-  Portuguese) scientific platform combining an interactive AI Tutor for QSAR/SAR
-  interpretation with a paper-ready QSAR/SAR modeling studio, multi-database
-  retrieval (ChEMBL, PubChem, BindingDB, RCSB PDB, UniProt, AlphaFold DB, GtoPdb,
-  Open Targets, COCONUT, UniChem), OECD-compliant validation, Matched Molecular
-  Pairs, SHAP and atomic attribution maps, bioisosteric de novo generation, and
-  3D conformer/receptor preparation for molecular docking and dynamics.
+  KhemSAR is a cross-platform (macOS, Linux, Windows), multilingual (English, Spanish,
+  Portuguese), MIT-licensed scientific platform that unifies retrieval from ten open
+  chemical resources, deterministic chemical structure curation, QSAR validation aligned
+  with the five OECD principles, mechanistic structure-activity interpretation through
+  activity cliffs, matched molecular pairs and feature attribution, bioisosteric de novo
+  design with three-dimensional ligand and receptor preparation, and a context-aware
+  scientific tutoring layer. Every run writes an auditable workspace.
+
+# Uncomment and complete once the article is published:
+# preferred-citation:
+#   type: article
+#   title: "KhemSAR: An Open-Source Platform for OECD-Aligned QSAR Validation, Mechanistic SAR Interpretation and Bioisosteric De Novo Design"
+#   authors:
+#     - family-names: "Bolívar Ávila"
+#       given-names: "Santiago"
+#       orcid: "https://orcid.org/0000-0002-3772-7604"
+#     - family-names: "Navarro"
+#       given-names: "Richard"
+#     - family-names: "España Puccini"
+#       given-names: "Pierine"
+#   journal: "Molecular Informatics"
+#   year: 2026
+#   volume: 0
+#   start: 0
+#   doi: "10.1002/minf.XXXXXXXXX"

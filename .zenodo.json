@@ -1,34 +1,32 @@
 {
-  "title": "KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform",
-  "description": "KhemSAR is an open-source, cross-platform (macOS, Linux, Windows) and trilingual (ES/EN/PT) scientific platform for paper-ready QSAR/SAR modeling, multi-database bioactivity curation, OECD-compliant validation, activity cliffs and matched molecular pair analysis, bioisosteric de novo molecule generation, 3D preparation for molecular docking and dynamics, and interactive AI-assisted scientific tutoring.",
+  "title": "KhemSAR: An Open-Source Platform for OECD-Aligned QSAR Validation, Mechanistic SAR Interpretation and Bioisosteric De Novo Design",
+  "description": "KhemSAR is an open-source, cross-platform (macOS, Linux, Windows) and trilingual (EN/ES/PT) scientific platform for QSAR/SAR modelling: multi-database bioactivity retrieval and curation, validation aligned with the five OECD principles, activity cliff and matched molecular pair analysis, feature attribution, bioisosteric de novo molecule generation, 3D ligand and receptor preparation for molecular docking, and interactive scientific tutoring. Every run writes an auditable workspace.",
   "upload_type": "software",
   "license": "MIT",
   "access_right": "open",
+  "version": "1.0.1",
   "creators": [
     {
-      "name": "Bolivar Avila, Santiago Jr.",
-      "affiliation": "Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia"
+      "name": "Bolívar Ávila, Santiago",
+      "affiliation": "Master's Programme in Biotechnology, Universidad Libre, Puerto Colombia 080007, Colombia",
+      "orcid": "0000-0002-3772-7604"
+    },
+    {
+      "name": "Navarro, Richard",
+      "affiliation": "Universidad del Atlántico, Facultad de Ciencias Básicas, Departamento de Química, Puerto Colombia, Atlántico, Colombia"
+    },
+    {
+      "name": "España Puccini, Pierine",
+      "affiliation": "IMB-Research Group in Medicine and Biotechnology, Universidad Libre, Puerto Colombia 080007, Colombia"
     }
   ],
   "keywords": [
-    "QSAR",
-    "SAR",
-    "Cheminformatics",
-    "Drug Discovery",
-    "Bioisosterism",
-    "De Novo Molecule Design",
-    "Applicability Domain",
-    "OECD QSAR Principles",
-    "Matched Molecular Pairs",
-    "Molecular Docking Preparation",
-    "Artificial Intelligence"
+    "QSAR", "SAR", "Cheminformatics", "Drug Discovery", "Bioisosterism",
+    "De Novo Molecule Design", "Applicability Domain", "OECD QSAR Principles",
+    "Matched Molecular Pairs", "Model Validation", "Molecular Docking Preparation"
   ],
   "related_identifiers": [
-    {
-      "scheme": "url",
-      "identifier": "https://github.com/Sbolivar16/KhemSAR",
-      "relation": "isSupplementTo"
-    }
+    { "scheme": "url", "identifier": "https://github.com/Sbolivar16/KhemSAR", "relation": "isSupplementTo" }
   ],
-  "notes": "Developed at the Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia."
+  "notes": "Developed at the Master's Programme in Biotechnology, Universidad Libre, Puerto Colombia, Colombia."
 }
