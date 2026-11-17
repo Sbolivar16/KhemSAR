@@ -3,6 +3,7 @@ message: "If you use KhemSAR in your research, please cite it using the metadata
 title: "KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform"
 type: software
 version: "1.0.0"
+doi: "10.5281/zenodo.24308701"
 date-released: "2026-11-16"
 license: MIT
 repository-code: "https://github.com/Sbolivar16/KhemSAR"
