@@ -2,9 +2,9 @@
 
 **Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric *De Novo* Molecule Design Platform**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Sbolivar16/KhemSAR/blob/main/LICENSE)
 [![Python 3.10–3.12](https://img.shields.io/badge/Python-3.10%E2%80%933.12-3776AB.svg)](https://www.python.org/)
-[![OECD QSAR Principles](https://img.shields.io/badge/OECD-5%20Principles%20Compliant-009E73.svg)](SCIENTIFIC_METHODOLOGY.md)
+[![OECD QSAR Principles](https://img.shields.io/badge/OECD-5%20Principles%20Compliant-009E73.svg)](https://github.com/Sbolivar16/KhemSAR/blob/main/SCIENTIFIC_METHODOLOGY.md)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24308700.svg)](https://doi.org/10.5281/zenodo.24308700)
 
 **Authors:** Santiago Bolívar Ávila ([ORCID 0000-0002-3772-7604](https://orcid.org/0000-0002-3772-7604)), Richard Navarro, Pierine España Puccini  
@@ -39,24 +39,24 @@
 ## Screenshots
 
 ### 1. AI Science Tutor & Contextual Study Interpretation
-![AI Science Tutor](docs/screenshots/01_ai_tutor_en.png)
+![AI Science Tutor](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/01_ai_tutor_en.png)
 
 ### 2. 3D PDB Receptor Viewer (`3LN1`) & Fourches Chemical Curation (2D Gallery)
-![3D PDB & Curation](docs/screenshots/02_curation_pdb3d_en.png)
-![Curated 2D Structures](docs/screenshots/02b_curated_structures_2d_en.png)
+![3D PDB & Curation](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/02_curation_pdb3d_en.png)
+![Curated 2D Structures](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/02b_curated_structures_2d_en.png)
 
 ### 3. OECD QSAR Validation (Linear Regression, Williams Plot, Y-Scrambling & 2D Table)
-![QSAR Linear Regression & Validation](docs/screenshots/03_qsar_regression_validation_en.png)
-![Train & Test 2D Molecules](docs/screenshots/03b_qsar_molecules_2d_en.png)
+![QSAR Linear Regression & Validation](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/03_qsar_regression_validation_en.png)
+![Train & Test 2D Molecules](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/03b_qsar_molecules_2d_en.png)
 
 ### 4. SAR Chemical Space & 2D Atomic Attribution Map
-![SAR & Atomic Attribution](docs/screenshots/04_sar_atomic_map_en.png)
+![SAR & Atomic Attribution](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/04_sar_atomic_map_en.png)
 
 ### 5. Bioisosteric *De Novo* Design (Multi-Objective MPO)
-![De Novo Bioisosteres](docs/screenshots/05_denovo_bioisosteres_en.png)
+![De Novo Bioisosteres](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/05_denovo_bioisosteres_en.png)
 
 ### 6. Cloud Storage & Google Colab Backup
-![Cloud & Backup](docs/screenshots/06_cloud_backup_en.png)
+![Cloud & Backup](https://raw.githubusercontent.com/Sbolivar16/KhemSAR/main/docs/screenshots/06_cloud_backup_en.png)
 
 ---
 
@@ -70,13 +70,13 @@ cd KhemSAR
 - **macOS / Linux:** `./install_and_run.sh`
 - **Windows:** `install_and_run.bat`
 
-Then open `http://127.0.0.1:8765` in your browser. See [INSTALL.md](INSTALL.md) for detailed instructions.
+Then open `http://127.0.0.1:8765` in your browser. See [INSTALL.md](https://github.com/Sbolivar16/KhemSAR/blob/main/INSTALL.md) for detailed instructions.
 
 ---
 
 ## How to Cite
 
-Please cite the version of **KhemSAR** you used. For v1.0.1 (which contains the corrected cRp2 calculation, see [CHANGELOG.md](CHANGELOG.md)) use the version DOI [10.5281/zenodo.24318136](https://doi.org/10.5281/zenodo.24318136). The concept DOI [10.5281/zenodo.24308700](https://doi.org/10.5281/zenodo.24308700) always resolves to the latest release. Metadata is also available in `CITATION.cff`.
+Please cite the version of **KhemSAR** you used. For v1.0.1 (which contains the corrected cRp2 calculation, see [CHANGELOG.md](https://github.com/Sbolivar16/KhemSAR/blob/main/CHANGELOG.md)) use the version DOI [10.5281/zenodo.24318136](https://doi.org/10.5281/zenodo.24318136). The concept DOI [10.5281/zenodo.24308700](https://doi.org/10.5281/zenodo.24308700) always resolves to the latest release. Metadata is also available in `CITATION.cff`.
 
 ```bibtex
 @software{bolivar_avila_khemsar_2026,

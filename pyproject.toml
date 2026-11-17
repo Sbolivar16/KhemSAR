@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=69.0", "wheel"]
+requires = ["setuptools>=77.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,16 +7,18 @@ name = "khemsar"
 version = "1.0.1"
 description = "Rigorous, paper-ready QSAR/SAR modeling, scientific AI tutor, and bioisosteric de novo design platform."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.10,<3.13"
 authors = [
-  { name = "Santiago Jr. Bolivar Avila" }
+  { name = "Santiago Bolívar Ávila" },
+  { name = "Richard Navarro" },
+  { name = "Pierine España Puccini" }
 ]
 keywords = ["QSAR", "SAR", "cheminformatics", "drug-discovery", "bioisosterism", "rdkit", "docking"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.10",
@@ -67,6 +69,9 @@ khemsar = "khemsar.main:cli"
 Homepage = "https://github.com/Sbolivar16/KhemSAR"
 Repository = "https://github.com/Sbolivar16/KhemSAR"
 Issues = "https://github.com/Sbolivar16/KhemSAR/issues"
+Documentation = "https://github.com/Sbolivar16/KhemSAR/blob/main/INSTALL.md"
+Changelog = "https://github.com/Sbolivar16/KhemSAR/blob/main/CHANGELOG.md"
+DOI = "https://doi.org/10.5281/zenodo.24308700"
 
 [tool.setuptools.packages.find]
 include = ["khemsar*"]
