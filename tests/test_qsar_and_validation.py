@@ -8,6 +8,7 @@ import pandas as pd
 from khemsar.chemistry.curation import CurationConfig, curate_bioactivity_dataset
 from khemsar.qsar.modeling import QSARTrainConfig, predict_with_qsar_bundle, train_and_validate_qsar
 from khemsar.qsar.splitting import split_dataset
+from khemsar.qsar.validation import compute_crp2, run_y_scrambling
 
 DEMO_CSV = Path(__file__).resolve().parent.parent / "khemsar" / "data" / "demo_dataset.csv"
 
@@ -74,3 +75,23 @@ def test_qsar_classification() -> None:
     )
     assert "MCC_ext" in res["best_metrics"]
     assert "ROC_AUC_ext" in res["best_metrics"]
+
+
+def test_crp2_formula_and_y_scrambling_known_values() -> None:
+    # Exact analytical check of Rücker et al. (2007): cRp2 = R * sqrt(R^2 - R^2_perm_mean)
+    # R^2 = 0.81 (R = 0.9), R^2_perm_mean = 0.17 -> 0.9 * sqrt(0.64) = 0.9 * 0.8 = 0.72
+    assert np.isclose(compute_crp2(0.81, 0.17), 0.72, atol=1e-9)
+    assert compute_crp2(0.20, 0.35) == 0.0
+    assert compute_crp2(-0.10, 0.05) == 0.0
+
+    from sklearn.linear_model import Ridge
+
+    rng = np.random.default_rng(123)
+    X = rng.normal(size=(80, 4))
+    y = 2.5 * X[:, 0] - 1.2 * X[:, 1] + rng.normal(scale=0.15, size=80)
+    ys = run_y_scrambling(Ridge(alpha=1.0), X, y, task_type="regression", n_permutations=20, cv_folds=5, random_state=42)
+    expected_crp2 = round(compute_crp2(ys["original_R2_or_MCC"], max(0.0, ys["scrambled_mean"])), 4)
+    assert np.isclose(ys["cRp2"], expected_crp2, atol=1e-3)
+    assert ys["cRp2"] != ys["original_R2_or_MCC"]
+    assert ys["original_Q2_CV"] != ys["original_R2_or_MCC"]
+    assert ys["random_state"] == 42

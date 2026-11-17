@@ -160,6 +160,14 @@ def compute_classification_metrics(
     }
 
 
+def compute_crp2(r2_real: float, r2_scrambled_mean: float) -> float:
+    """Compute Rücker et al. (2007) / Todeschini cRp2 = R * sqrt(max(0, R^2 - R^2_perm_mean))."""
+    if r2_real <= 0.0:
+        return 0.0
+    diff = max(0.0, float(r2_real) - float(r2_scrambled_mean))
+    return float(np.sqrt(float(r2_real)) * np.sqrt(diff))
+
+
 def run_y_scrambling(
     estimator: Any,
     X_train: np.ndarray,
@@ -170,9 +178,14 @@ def run_y_scrambling(
     random_state: int = 42,
     progress_cb: Callable[[int, str], None] | None = None,
 ) -> dict[str, Any]:
-    """Perform Y-scrambling robustness check and compute Todeschini cRp2."""
+    """Perform Y-scrambling robustness check and compute Rücker/Todeschini cRp2."""
     rng = np.random.default_rng(random_state)
     n_folds = min(3, cv_folds, max(2, len(y_train) // 4))
+
+    if task_type == "classification":
+        cv = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=random_state)
+    else:
+        cv = KFold(n_splits=n_folds, shuffle=True, random_state=random_state)
 
     base_model = clone(estimator)
     base_model.fit(X_train, y_train)
@@ -183,11 +196,9 @@ def run_y_scrambling(
         base_cv_pred = base_train_pred
 
     if task_type == "classification":
-        cv = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=random_state)
         base_score = float(matthews_corrcoef(y_train, base_train_pred))
         base_cv_score = float(matthews_corrcoef(y_train, base_cv_pred))
     else:
-        cv = KFold(n_splits=n_folds, shuffle=True, random_state=random_state)
         base_score = float(r2_score(y_train, base_train_pred))
         base_cv_score = float(r2_score(y_train, base_cv_pred))
 
@@ -218,12 +229,11 @@ def run_y_scrambling(
 
     mean_scram_r2 = float(np.mean(scrambled_r2))
     mean_scram_q2 = float(np.mean(scrambled_q2))
-    # Cross-validated Todeschini-style cRp2 avoids false 0.0 on interpolating tree ensembles
-    diff_cv = max(0.0, base_cv_score - max(0.0, mean_scram_q2))
-    crp2 = float(np.sqrt(max(0.0, base_cv_score)) * np.sqrt(diff_cv)) if base_cv_score > 0 else 0.0
+    crp2 = compute_crp2(base_score, max(0.0, mean_scram_r2))
 
     return {
         "n_permutations": n_permutations,
+        "random_state": int(random_state),
         "original_R2_or_MCC": round(base_score, 4),
         "original_Q2_CV": round(base_cv_score, 4),
         "scrambled_mean": round(mean_scram_r2, 4),
