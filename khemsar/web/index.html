@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KhemSAR — QSAR/SAR, AI Tutor &amp; Bioisosteric De Novo Platform</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+  <script src="https://3Dmol.org/build/3Dmol-min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-badge">KS</div>
+      <div>
+        <h1>KhemSAR <span class="version-pill">v1.0.0 · MIT</span></h1>
+        <p id="app-subtitle" class="subtitle" data-i18n="app.subtitle"></p>
+      </div>
+    </div>
+    <div class="topbar-controls">
+      <label class="lang-box">
+        <span id="lbl-lang" data-i18n="app.language">Idioma</span>
+        <select id="lang-select">
+          <option value="es">Español (ES)</option>
+          <option value="en">English (EN)</option>
+          <option value="pt">Português (PT)</option>
+        </select>
+      </label>
+      <div id="active-project-pill" class="project-pill">Proyecto: Ninguno</div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="tutor" id="nav-tutor" data-i18n="app.nav_tutor"></button>
+    <button class="tab-btn" data-tab="studio" id="nav-studio" data-i18n="app.nav_studio"></button>
+    <button class="tab-btn" data-tab="cloud" id="nav-cloud" data-i18n="app.nav_cloud"></button>
+    <button class="tab-btn" data-tab="settings" id="nav-settings" data-i18n="app.nav_settings"></button>
+    <button class="tab-btn" data-tab="docs" id="nav-install" data-i18n="app.nav_install"></button>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: AI TUTOR -->
+    <section id="tab-tutor" class="tab-panel active">
+      <div class="hero-card">
+        <h2 id="tutor-hero-title" data-i18n="tutor.hero_title"></h2>
+        <p id="tutor-hero-desc" data-i18n="tutor.hero_desc"></p>
+        <div class="row-actions">
+          <button class="btn primary" id="btn-interpret-study" data-i18n="tutor.analyze_study"></button>
+          <button class="btn secondary" id="btn-quick-demo-from-tutor" data-i18n="tutor.quick_demo"></button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 id="tutor-lessons-title" data-i18n="tutor.lessons_title"></h3>
+          <div id="lessons-container" class="lessons-list"></div>
+        </div>
+
+        <div class="card">
+          <h3 data-i18n="tutor.chat_title"></h3>
+          <div id="tutor-chat-log" class="chat-log"></div>
+          <div class="chat-input-row">
+            <textarea id="tutor-question" rows="2" data-i18n-placeholder="tutor.ask_placeholder"></textarea>
+            <button class="btn primary" id="btn-ask-tutor" data-i18n="tutor.send"></button>
+          </div>
+          <hr class="divider" />
+          <h3 id="tutor-quiz-title" data-i18n="tutor.quiz_title"></h3>
+          <div id="quiz-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: QSAR / SAR STUDIO -->
+    <section id="tab-studio" class="tab-panel">
+      <div class="studio-toolbar card">
+        <div class="toolbar-left">
+          <input type="text" id="project-name-input" value="COX2_QSAR_Study" data-i18n-placeholder="studio.project_name_ph" />
+          <button class="btn secondary" id="btn-new-project" data-i18n="studio.new_project"></button>
+          <button class="btn accent" id="btn-load-demo" data-i18n="studio.load_demo"></button>
+        </div>
+        <div class="toolbar-right">
+          <label class="file-upload-btn">
+            <span data-i18n="studio.upload_csv"></span>
+            <input type="file" id="csv-upload-input" accept=".csv" hidden />
+          </label>
+          <select id="project-select"></select>
+        </div>
+      </div>
+
+      <div id="global-progress-wrap" class="progress-card" style="display:none;">
+        <div class="progress-header">
+          <span id="global-progress-text">Processing...</span>
+          <span id="global-progress-pct" class="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div id="global-progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="stepper">
+        <button class="step-pill active" data-step="1" id="step-lbl-1" data-i18n="studio.step1"></button>
+        <button class="step-pill" data-step="2" id="step-lbl-2" data-i18n="studio.step2"></button>
+        <button class="step-pill" data-step="3" id="step-lbl-3" data-i18n="studio.step3"></button>
+        <button class="step-pill" data-step="4" id="step-lbl-4" data-i18n="studio.step4"></button>
+        <button class="step-pill" data-step="5" id="step-lbl-5" data-i18n="studio.step5"></button>
+        <button class="step-pill" data-step="6" id="step-lbl-6" data-i18n="studio.step6"></button>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step-panel active" id="step-1">
+        <div class="card">
+          <h3 data-i18n="studio.s1_title"></h3>
+          <p class="muted" data-i18n="studio.s1_desc"></p>
+          <textarea id="research-intent-input" rows="3" data-i18n-placeholder="studio.s1_intent_ph"></textarea>
+          <div class="row-actions">
+            <button class="btn secondary" id="btn-ai-parse" data-i18n="studio.s1_parse_btn"></button>
+          </div>
+          <div class="form-grid-4">
+            <label><span data-i18n="studio.s1_target_lbl"></span> <input type="text" id="q-target" value="PTGS2" /></label>
+            <label><span data-i18n="studio.s1_chembl_lbl"></span> <input type="text" id="q-chembl" placeholder="CHEMBL230" /></label>
+            <label><span data-i18n="studio.s1_pdb_lbl"></span> <input type="text" id="q-pdb" placeholder="3LN1" /></label>
+            <label><span data-i18n="studio.s1_limit_lbl"></span> <input type="number" id="q-limit" value="1500" min="50" max="5000" /></label>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="btn-run-search" data-i18n="studio.s1_search_btn"></button>
+          </div>
+          <div id="search-summary-box" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-panel" id="step-2">
+        <div class="grid-2">
+          <div class="card">
+            <h3 data-i18n="studio.s2_pdb_title"></h3>
+            <div class="form-grid-2">
+              <label><span data-i18n="studio.s2_pdb_lbl"></span> <input type="text" id="pdb-id-input" value="3LN1" /></label>
+              <label><span data-i18n="studio.s2_chain_lbl"></span> <input type="text" id="pdb-chain-input" placeholder="A" /></label>
+            </div>
+            <div class="row-actions">
+              <button class="btn primary" id="btn-fetch-pdb" data-i18n="studio.s2_pdb_btn"></button>
+            </div>
+            <div id="pdb-viewer-3d" class="viewer-3d"></div>
+            <div id="pdb-box-info" class="result-box"></div>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="studio.s2_curate_title"></h3>
+            <div class="form-grid-2">
+              <label><span data-i18n="studio.s2_endpoint_lbl"></span>
+                <select id="curate-endpoint">
+                  <option value="AUTO" data-i18n="studio.s2_endpoint_auto"></option>
+                  <option value="IC50">IC50</option>
+                  <option value="Ki">Ki</option>
+                  <option value="Kd">Kd</option>
+                  <option value="EC50">EC50</option>
+                </select>
+              </label>
+              <label><span data-i18n="studio.s2_task_lbl"></span>
+                <select id="curate-task">
+                  <option value="regression" data-i18n="studio.s2_task_reg"></option>
+                  <option value="classification" data-i18n="studio.s2_task_cls"></option>
+                </select>
+              </label>
+              <label><span data-i18n="studio.s2_cutoff_lbl"></span> <input type="number" id="curate-cutoff" value="6.0" step="0.1" /></label>
+              <label><span data-i18n="studio.s2_spread_lbl"></span> <input type="number" id="curate-spread" value="0.5" step="0.1" /></label>
+            </div>
+            <div class="row-actions">
+              <button class="btn primary" id="btn-run-curate" data-i18n="studio.s2_curate_btn"></button>
+            </div>
+            <div id="curation-report-box" class="result-box"></div>
+          </div>
+        </div>
+        <div class="card mt-16">
+          <h3 data-i18n="studio.s2_gallery_title"></h3>
+          <div id="curated-2d-gallery" class="result-box"></div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-panel" id="step-3">
+        <div class="card">
+          <h3 data-i18n="studio.s3_title"></h3>
+          <div class="form-grid-4">
+            <label><span data-i18n="studio.s3_feat_lbl"></span>
+              <select id="qsar-features">
+                <option value="hybrid" data-i18n="studio.s3_feat_hybrid"></option>
+                <option value="physchem" data-i18n="studio.s3_feat_phys"></option>
+                <option value="morgan_ecfp4" data-i18n="studio.s3_feat_ecfp"></option>
+                <option value="maccs" data-i18n="studio.s3_feat_maccs"></option>
+              </select>
+            </label>
+            <label><span data-i18n="studio.s3_split_lbl"></span>
+              <select id="qsar-split">
+                <option value="scaffold" data-i18n="studio.s3_split_scaffold"></option>
+                <option value="kennard_stone" data-i18n="studio.s3_split_ks"></option>
+                <option value="temporal" data-i18n="studio.s3_split_temp"></option>
+                <option value="stratified" data-i18n="studio.s3_split_strat"></option>
+              </select>
+            </label>
+            <label><span data-i18n="studio.s3_test_lbl"></span> <input type="number" id="qsar-testsize" value="0.2" min="0.1" max="0.4" step="0.05" /></label>
+            <label><span data-i18n="studio.s3_yscram_lbl"></span> <input type="number" id="qsar-yscram" value="30" min="10" max="100" /></label>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="btn-train-qsar" data-i18n="studio.s3_train_btn"></button>
+          </div>
+          <div id="qsar-metrics-box" class="result-box"></div>
+          <div class="plots-grid-3 mt-16">
+            <div id="plot-parity-interactive" class="plotly-box"></div>
+            <div id="plot-williams-interactive" class="plotly-box"></div>
+            <div id="plot-yscrambling-interactive" class="plotly-box"></div>
+          </div>
+          <div class="mt-16">
+            <h4 data-i18n="studio.s3_mols_title"></h4>
+            <div id="qsar-molecules-2d-box" class="result-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-panel" id="step-4">
+        <div class="card">
+          <h3 data-i18n="studio.s4_title"></h3>
+          <div class="form-grid-4">
+            <label><span data-i18n="studio.s4_sim_lbl"></span> <input type="number" id="sar-sim" value="0.65" step="0.05" /></label>
+            <label><span data-i18n="studio.s4_dp_lbl"></span> <input type="number" id="sar-dp" value="1.0" step="0.1" /></label>
+            <label><span data-i18n="studio.s4_proj_lbl"></span>
+              <select id="sar-proj">
+                <option value="pca">PCA</option>
+                <option value="tsne">t-SNE</option>
+                <option value="umap">UMAP</option>
+              </select>
+            </label>
+            <label><span data-i18n="studio.s4_core_lbl"></span> <input type="text" id="sar-core" data-i18n-placeholder="studio.s4_core_ph" /></label>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="btn-run-sar" data-i18n="studio.s4_sar_btn"></button>
+            <button class="btn accent" id="btn-gen-paper-plots" data-i18n="studio.s4_plots_btn"></button>
+          </div>
+          <div class="grid-2 mt-16">
+            <div id="plot-space-interactive" class="plotly-box"></div>
+            <div id="sar-atomic-box" class="card-inner">
+              <h4 data-i18n="studio.s4_atomic_title"></h4>
+              <div class="row-actions">
+                <input type="text" id="atomic-smiles-input" data-i18n-placeholder="studio.s4_atomic_ph" />
+                <button class="btn secondary" id="btn-atomic-map" data-i18n="studio.s4_atomic_btn"></button>
+              </div>
+              <div id="atomic-svg-container" class="svg-box"></div>
+            </div>
+          </div>
+          <div id="sar-tables-box" class="result-box mt-16"></div>
+          <div id="paper-plots-links" class="result-box mt-16"></div>
+          <div id="paper-plots-preview" class="paper-preview-grid"></div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-panel" id="step-5">
+        <div class="card">
+          <h3 data-i18n="studio.s5_title"></h3>
+          <div class="form-grid-3">
+            <label><span data-i18n="studio.s5_seeds_lbl"></span> <input type="number" id="dn-seeds" value="8" min="2" max="20" /></label>
+            <label><span data-i18n="studio.s5_brics_lbl"></span> <input type="number" id="dn-brics" value="30" min="0" max="100" /></label>
+            <label><span data-i18n="studio.s5_max_lbl"></span> <input type="number" id="dn-max" value="30" min="5" max="100" /></label>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="btn-gen-denovo" data-i18n="studio.s5_gen_btn"></button>
+          </div>
+          <div id="denovo-table-box" class="result-box mt-16"></div>
+          <div id="denovo-3d-panel" class="card-inner mt-16" style="display:none;">
+            <h4 data-i18n="studio.s5_3d_title"></h4>
+            <div id="denovo-3d-meta" class="muted"></div>
+            <div id="denovo-viewer-3d" class="viewer-3d mt-16"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step-panel" id="step-6">
+        <div class="card">
+          <h3 data-i18n="studio.s6_title"></h3>
+          <div class="form-grid-3">
+            <label><span data-i18n="studio.s6_ph_lbl"></span>
+              <select id="exp-ph74">
+                <option value="true" data-i18n="studio.s6_ph_yes"></option>
+                <option value="false" data-i18n="studio.s6_ph_no"></option>
+              </select>
+            </label>
+            <label><span data-i18n="studio.s6_ff_lbl"></span>
+              <select id="exp-ff">
+                <option value="MMFF94">MMFF94s / MMFF94</option>
+                <option value="UFF">UFF</option>
+              </select>
+            </label>
+            <label><span data-i18n="studio.s6_nlig_lbl"></span> <input type="number" id="exp-max" value="25" min="1" max="100" /></label>
+          </div>
+          <div class="row-actions">
+            <button class="btn primary" id="btn-export-3d" data-i18n="studio.s6_export_btn"></button>
+            <button class="btn secondary" id="btn-sync-cloud-now" data-i18n="studio.s6_sync_btn"></button>
+            <button class="btn accent" id="btn-download-colab" data-i18n="studio.s6_colab_btn"></button>
+          </div>
+          <div id="export3d-result-box" class="result-box mt-16"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CLOUD -->
+    <section id="tab-cloud" class="tab-panel">
+      <div class="card">
+        <h2 id="cloud-title" data-i18n="cloud.title"></h2>
+        <p id="cloud-desc" data-i18n="cloud.desc"></p>
+        <div class="callout" id="terabox-tip" data-i18n="cloud.terabox_tip"></div>
+      </div>
+
+      <div class="card mt-16">
+        <h3 data-i18n="cloud.opt1_title"></h3>
+        <p class="muted" data-i18n="cloud.opt1_desc"></p>
+        <label><span data-i18n="cloud.folder_url_lbl"></span>
+          <input type="url" id="cloud-folder-url" data-i18n-placeholder="cloud.folder_url_ph" />
+        </label>
+        <div class="row-actions">
+          <button class="btn primary" id="btn-save-open-cloud" data-i18n="cloud.save_open_btn"></button>
+        </div>
+        <div id="cloud-link-box" class="result-box"></div>
+      </div>
+
+      <div class="card mt-16">
+        <h3 data-i18n="cloud.opt2_title"></h3>
+        <p class="muted" data-i18n="cloud.opt2_desc"></p>
+        <div class="row-actions">
+          <button class="btn secondary" id="btn-detect-cloud" data-i18n="cloud.detect_btn"></button>
+          <button class="btn primary" id="btn-cloud-backup-btn" data-i18n="cloud.backup_btn"></button>
+          <button class="btn accent" id="btn-cloud-colab-btn" data-i18n="cloud.colab_btn"></button>
+        </div>
+        <div id="cloud-folders-box" class="result-box"></div>
+        <hr class="divider" />
+        <label><span data-i18n="cloud.gdrive_csv_lbl"></span>
+          <input type="url" id="gdrive-csv-url" data-i18n-placeholder="cloud.gdrive_csv_ph" />
+        </label>
+        <div class="row-actions">
+          <button class="btn secondary" id="btn-import-gdrive-csv" data-i18n="cloud.gdrive_csv_btn"></button>
+        </div>
+        <div id="gdrive-csv-status" class="result-box"></div>
+      </div>
+
+      <details class="card mt-16">
+        <summary style="cursor:pointer; font-weight:700;" data-i18n="cloud.adv_summary"></summary>
+        <p class="muted mt-16" data-i18n="cloud.adv_guide"></p>
+        <div class="grid-2 mt-16">
+          <div>
+            <label><span data-i18n="cloud.gdrive_lbl"></span> <input type="text" id="gdrive-client-id" placeholder="xxxx.apps.googleusercontent.com" /></label>
+            <div class="row-actions">
+              <button class="btn secondary" id="btn-gdrive-oauth" data-i18n="cloud.gdrive_btn"></button>
+            </div>
+            <div id="gdrive-oauth-box" class="result-box"></div>
+          </div>
+          <div>
+            <label><span data-i18n="cloud.dropbox_lbl"></span> <input type="text" id="dropbox-app-key" placeholder="Dropbox App Key" /></label>
+            <div class="row-actions">
+              <button class="btn secondary" id="btn-dropbox-oauth" data-i18n="cloud.dropbox_btn"></button>
+            </div>
+            <div id="dropbox-oauth-box" class="result-box"></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- TAB 4: SETTINGS & AI -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="card">
+        <h3 data-i18n="settings.title"></h3>
+        <div class="form-grid-2">
+          <label><span data-i18n="settings.provider_lbl"></span>
+            <select id="set-ai-provider">
+              <option value="offline" data-i18n="settings.provider_offline"></option>
+              <option value="ollama" data-i18n="settings.provider_ollama"></option>
+              <option value="gemini" data-i18n="settings.provider_gemini"></option>
+              <option value="openai" data-i18n="settings.provider_openai"></option>
+              <option value="anthropic" data-i18n="settings.provider_anthropic"></option>
+            </select>
+          </label>
+          <label><span data-i18n="settings.model_lbl"></span> <input type="text" id="set-ai-model" value="llama3.1" /></label>
+          <label><span data-i18n="settings.ollama_lbl"></span> <input type="text" id="set-ollama-url" value="http://localhost:11434" /></label>
+          <label><span data-i18n="settings.apikey_lbl"></span> <input type="password" id="set-ai-key" data-i18n-placeholder="settings.apikey_ph" /></label>
+          <label><span data-i18n="settings.plot_lang_lbl"></span>
+            <select id="set-plot-lang">
+              <option value="en" data-i18n="settings.plot_lang_en"></option>
+              <option value="match_ui" data-i18n="settings.plot_lang_match"></option>
+            </select>
+          </label>
+          <label><span data-i18n="settings.sync_dir_lbl"></span> <input type="text" id="set-sync-dir" data-i18n-placeholder="settings.sync_dir_ph" /></label>
+        </div>
+        <div class="row-actions">
+          <button class="btn primary" id="btn-save-settings" data-i18n="settings.save_btn"></button>
+          <button class="btn secondary" id="btn-check-ollama" data-i18n="settings.ollama_btn"></button>
+        </div>
+        <div id="settings-status-box" class="result-box"></div>
+      </div>
+    </section>
+
+    <!-- TAB 5: INSTALL & ZENODO DOCS -->
+    <section id="tab-docs" class="tab-panel">
+      <div class="card">
+        <h2 data-i18n="docs.title"></h2>
+        <div class="grid-2">
+          <div>
+            <h3 data-i18n="docs.req_title"></h3>
+            <ul>
+              <li data-i18n="docs.req_os"></li>
+              <li data-i18n="docs.req_py"></li>
+              <li data-i18n="docs.req_ram"></li>
+              <li data-i18n="docs.req_deps"></li>
+            </ul>
+            <h3 data-i18n="docs.install_title"></h3>
+            <pre class="code-block">git clone https://github.com/Sbolivar16/KhemSAR.git
+cd KhemSAR
+# macOS / Linux:
+./install_and_run.sh
+# Windows:
+install_and_run.bat</pre>
+          </div>
+          <div>
+            <h3 data-i18n="docs.cite_title"></h3>
+            <!-- Academic Citation standardized in English -->
+            <p><strong>Author:</strong> Santiago Jr. Bolivar Avila<br />
+            <strong>Affiliation:</strong> Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia.<br />
+            <strong>License:</strong> MIT</p>
+            <p data-i18n="docs.cite_note"></p>
+            <pre class="code-block">@software{bolivar_avila_khemsar_2026,
+  author    = {Bolivar Avila, Santiago Jr.},
+  title     = {{KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform}},
+  year      = {2026},
+  publisher = {GitHub / Zenodo},
+  url       = {https://github.com/Sbolivar16/KhemSAR},
+  note      = {Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia}
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="footer-credit" data-i18n="app.author_credit"></span> · <a href="https://github.com/Sbolivar16/KhemSAR" target="_blank" rel="noopener">GitHub: Sbolivar16/KhemSAR</a>
+  </footer>
+</body>
+</html>

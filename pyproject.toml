@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "khemsar"
+version = "1.0.0"
+description = "Rigorous, paper-ready QSAR/SAR modeling, scientific AI tutor, and bioisosteric de novo design platform."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10,<3.13"
+authors = [
+  { name = "Santiago Jr. Bolivar Avila" }
+]
+keywords = ["QSAR", "SAR", "cheminformatics", "drug-discovery", "bioisosterism", "rdkit", "docking"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.32.0",
+  "pydantic>=2.9.0",
+  "httpx>=0.27.0",
+  "rdkit>=2024.3.5",
+  "numpy>=1.26.0,<2.3.0",
+  "pandas>=2.2.0",
+  "scipy>=1.13.0",
+  "scikit-learn>=1.5.0",
+  "matplotlib>=3.9.0",
+  "seaborn>=0.13.0",
+  "openpyxl>=3.1.5",
+  "python-multipart>=0.0.12",
+  "joblib>=1.4.0"
+]
+
+[project.optional-dependencies]
+ml = [
+  "xgboost>=2.1.0",
+  "lightgbm>=4.5.0",
+  "shap>=0.46.0"
+]
+umap = [
+  "umap-learn>=0.5.6"
+]
+docking = [
+  "meeko>=0.6.0"
+]
+dev = [
+  "pytest>=8.3.0",
+  "pytest-asyncio>=0.24.0",
+  "respx>=0.21.0"
+]
+
+[project.scripts]
+khemsar = "khemsar.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/Sbolivar16/KhemSAR"
+Repository = "https://github.com/Sbolivar16/KhemSAR"
+Issues = "https://github.com/Sbolivar16/KhemSAR/issues"
+
+[tool.setuptools.packages.find]
+include = ["khemsar*"]
+
+[tool.setuptools.package-data]
+khemsar = ["locales/*.json", "data/*.csv", "web/**/*", "web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+asyncio_default_fixture_loop_scope = "function"

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use KhemSAR in your research, please cite it using the metadata below."
+title: "KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform"
+type: software
+version: "1.0.0"
+date-released: "2026-11-16"
+license: MIT
+repository-code: "https://github.com/Sbolivar16/KhemSAR"
+url: "https://github.com/Sbolivar16/KhemSAR"
+authors:
+  - family-names: "Bolivar Avila"
+    given-names: "Santiago Jr."
+    affiliation: "Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia"
+keywords:
+  - QSAR
+  - SAR
+  - cheminformatics
+  - drug discovery
+  - bioisosterism
+  - de novo design
+  - applicability domain
+  - OECD principles
+  - matched molecular pairs
+  - artificial intelligence
+abstract: >-
+  KhemSAR is a cross-platform (macOS, Linux, Windows), multilingual (Spanish, English,
+  Portuguese) scientific platform combining an interactive AI Tutor for QSAR/SAR
+  interpretation with a paper-ready QSAR/SAR modeling studio, multi-database
+  retrieval (ChEMBL, PubChem, BindingDB, RCSB PDB, UniProt, AlphaFold DB, GtoPdb,
+  Open Targets, COCONUT, UniChem), OECD-compliant validation, Matched Molecular
+  Pairs, SHAP and atomic attribution maps, bioisosteric de novo generation, and
+  3D conformer/receptor preparation for molecular docking and dynamics.
