@@ -78,6 +78,7 @@ Then open `http://127.0.0.1:8765` in your browser. See [INSTALL.md](INSTALL.md) 
 
 Please cite **KhemSAR** using `CITATION.cff` or the Zenodo DOI generated after publishing a release (see [ZENODO_GITHUB_GUIDE.md](ZENODO_GITHUB_GUIDE.md)):
 
+```bibtex
 @software{bolivar_avila_khemsar_2026,
   author       = {Bolivar Avila, Santiago Jr.},
   title        = {{KhemSAR: Rigorous AI-Assisted QSAR/SAR Modeling, Scientific Tutoring, and Bioisosteric De Novo Design Platform}},
@@ -89,3 +90,4 @@ Please cite **KhemSAR** using `CITATION.cff` or the Zenodo DOI generated after p
   note         = {Master's Program in Biotechnology, Universidad Libre, Barranquilla Campus, Colombia. Source code: https://github.com/Sbolivar16/KhemSAR}
 }
 ```
+
